@@ -14,14 +14,13 @@ export default function MkdSDK() {
   };
 
   this.login = async function (email, password, role) {
-    //TODO
     const response = await fetch(`${this._baseurl}/v2/api/lambda/login`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         "x-project": base64Encode,
       },
-      body: JSON.stringify({ email, password, role }),
+      body: JSON.stringify({ email, password, role })
     })
 
     const user = response.json()
@@ -99,6 +98,15 @@ export default function MkdSDK() {
 
   this.check = async function (role) {
     //TODO
+    const response = await fetch(`${this._baseurl}/v2/api/lambda/check`, {
+      method: "post",
+      headers: this.getHeader(),
+      body: JSON.stringify({ role })
+    })
+
+    const status = await response.json()
+
+    return status
   };
 
   return this;
