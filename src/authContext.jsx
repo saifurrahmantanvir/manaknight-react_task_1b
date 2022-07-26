@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import MkdSDK from "./utils/MkdSDK";
 
 export const AuthContext = React.createContext();
@@ -34,29 +35,35 @@ const reducer = (state, action) => {
 let sdk = new MkdSDK();
 
 export const tokenExpireError = (dispatch, errorMessage) => {
-  const role = localStorage.getItem("role");
+  // const role = JSON.parse(localStorage.getItem("role"));
   if (errorMessage === "TOKEN_EXPIRED") {
     dispatch({
-      type: "Logout",
+      type: "LOGOUT",
     });
-    window.location.href = "/" + role + "/login";
+    // window.location.href = "/" + role + "/login";
+    return false
   }
+  return true
 };
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state)
+  const navigate = useNavigate()
 
   React.useEffect(() => {
-    const login = async () => {
-      const user = await sdk.login("adminreacttask@manaknight.com", "a123456", "admin")
+    // TODO
+    const check = async () => {
+      const role = JSON.parse(localStorage.getItem("role")) || 'admin';
 
-      localStorage.setItem('token', JSON.stringify(user.token))
+      const response = await sdk.check(state.role)
+      const isTokenValid = tokenExpireError(dispatch, response.message)
 
-      dispatch({ type: 'LOGIN', payload: user })
+      if (!isTokenValid) {
+        navigate('/' + role + '/login')
+      }
     }
 
-    login()
+    check()
   }, []);
 
   return (

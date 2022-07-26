@@ -34,10 +34,12 @@ const AdminLoginPage = () => {
     const user = await sdk.login(email, password, "admin")
 
     localStorage.setItem('token', JSON.stringify(user.token))
+    localStorage.setItem('role', JSON.stringify(user.role))
 
     authDispatch({ type: 'LOGIN', payload: user })
     showToast(globalDispatch, 'Login successful')
-    navigate('/', { replace: true })
+
+    navigate('/admin/dashboard', { replace: true })
   };
 
   return (

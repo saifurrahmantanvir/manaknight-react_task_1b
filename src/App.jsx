@@ -5,13 +5,13 @@ import Main from "./main";
 
 function App() {
   return (
-    <AuthProvider>
-      <GlobalProvider>
-        <Router>
+    <Router>
+      <AuthProvider>
+        <GlobalProvider>
           <Main />
-        </Router>
-      </GlobalProvider>
-    </AuthProvider>
+        </GlobalProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

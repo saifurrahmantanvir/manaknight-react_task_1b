@@ -5,7 +5,6 @@ import SnackBar from "./components/SnackBar";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import { GlobalContext } from "./globalContext";
 
 function renderRoutes(role) {
   switch (role) {
@@ -30,21 +29,19 @@ function renderRoutes(role) {
 
 function Main() {
   const { state } = React.useContext(AuthContext);
-  const { state: { globalMessage } } = React.useContext(GlobalContext)
 
   return (
     <div className="h-full">
       <div className="flex w-full">
         <div className="w-full">
           <div className="page-wrapper w-full py-10 px-5">
-            {/* {!state.isAuthenticated
+            {!state.isAuthenticated
               ? renderRoutes("none")
-              : renderRoutes(state.role)} */}
-            {renderRoutes("none")}
+              : renderRoutes(state.role)}
           </div>
         </div>
       </div>
-      {globalMessage && <SnackBar />}
+      <SnackBar />
     </div>
   );
 }

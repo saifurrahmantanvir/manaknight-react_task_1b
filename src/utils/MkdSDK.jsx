@@ -1,3 +1,5 @@
+import { tokenExpireError } from '../authContext'
+
 export default function MkdSDK() {
   this._baseurl = "https://reacttask.mkdlabs.com";
   this._project_id = "reacttask";
@@ -42,7 +44,7 @@ export default function MkdSDK() {
     const header = {
       "Content-Type": "application/json",
       "x-project": base64Encode,
-      Authorization: "Bearer " + localStorage.getItem("token"),
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NTg4NzAyMzYsImV4cCI6MTY1ODg3MzgzNn0.c4C2ooGV0j-LcZtwpJ8DVlwCwytLoP5QgQtKP2hJ7PI',
     };
 
     switch (method) {
@@ -74,7 +76,7 @@ export default function MkdSDK() {
           payload.limit = 10;
         }
         const paginateResult = await fetch(
-          this._baseurl + `/v1/api/rest/${this._table}/${method}`,
+          this._baseurl + '/v1/api/rest/videos/PAGINATE',
           {
             method: "post",
             headers: header,
@@ -82,6 +84,7 @@ export default function MkdSDK() {
           }
         );
         const jsonPaginate = await paginateResult.json();
+        console.log(jsonPaginate)
 
         if (paginateResult.status === 401) {
           throw new Error(jsonPaginate.message);
@@ -103,10 +106,10 @@ export default function MkdSDK() {
       headers: this.getHeader(),
       body: JSON.stringify({ role })
     })
+    const data = await response.json()
 
-    const status = await response.json()
-
-    return status
+    console.log(data)
+    return data
   };
 
   return this;
