@@ -14,8 +14,10 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       //TODO
+      console.log(action.payload)
       return {
         ...state,
+        ...action.payload
       };
     case "LOGOUT":
       localStorage.clear();
@@ -44,8 +46,16 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+
+
   React.useEffect(() => {
-    //TODO
+    const login = async () => {
+      const user = await sdk.login("adminreacttask@manaknight.com", "a123456", "admin")
+
+      dispatch({ type: 'LOGIN', payload: user })
+    }
+
+    login()
   }, []);
 
   return (

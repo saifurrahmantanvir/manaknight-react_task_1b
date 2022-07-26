@@ -17,7 +17,6 @@ function renderRoutes(role) {
           ></Route>
         </Routes>
       );
-      break;
     default:
       return (
         <Routes>
@@ -25,7 +24,6 @@ function renderRoutes(role) {
           <Route path="*" exact element={<NotFoundPage />}></Route>
         </Routes>
       );
-      break;
   }
 }
 
