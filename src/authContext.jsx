@@ -16,6 +16,7 @@ const reducer = (state, action) => {
       //TODO
       return {
         ...state,
+        isAuthenticated: true,
         ...action.payload
       };
     case "LOGOUT":
@@ -44,6 +45,7 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state)
 
   React.useEffect(() => {
     const login = async () => {

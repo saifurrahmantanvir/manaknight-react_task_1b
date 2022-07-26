@@ -35,9 +35,10 @@ function Main() {
       <div className="flex w-full">
         <div className="w-full">
           <div className="page-wrapper w-full py-10 px-5">
-            {!state.isAuthenticated
+            {/* {!state.isAuthenticated
               ? renderRoutes("none")
-              : renderRoutes(state.role)}
+              : renderRoutes(state.role)} */}
+            {renderRoutes("none")}
           </div>
         </div>
       </div>
