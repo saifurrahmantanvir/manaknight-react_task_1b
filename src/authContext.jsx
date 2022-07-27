@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate()
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     // TODO
     const check = async () => {
       const role = JSON.parse(localStorage.getItem("role")) || 'admin';

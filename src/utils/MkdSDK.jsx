@@ -44,7 +44,7 @@ export default function MkdSDK() {
     const header = {
       "Content-Type": "application/json",
       "x-project": base64Encode,
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NTg4NzAyMzYsImV4cCI6MTY1ODg3MzgzNn0.c4C2ooGV0j-LcZtwpJ8DVlwCwytLoP5QgQtKP2hJ7PI',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
     };
 
     switch (method) {
@@ -76,7 +76,7 @@ export default function MkdSDK() {
           payload.limit = 10;
         }
         const paginateResult = await fetch(
-          this._baseurl + '/v1/api/rest/videos/PAGINATE',
+          this._baseurl + '/v1/api/rest/video/PAGINATE',
           {
             method: "post",
             headers: header,
